@@ -1,6 +1,7 @@
 package com.example.dailycost;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
@@ -34,10 +35,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cost cost= costs.get(position);
         holder.imageView.setImageResource(cost.getImagid());
+        holder.textView.setText(cost.getReason());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if(cost.getCost()==1)
-        holder.textView.setText("支出");
-        holder.number.setText(cost.getMoney().toString());
-
+        { holder.number.setText("-"+cost.getMoney().toString());
+        holder.imageView.setImageResource(R.drawable.pay);
+        holder.number.setTextColor(Color.RED);}
+        else
+        { holder.number.setText("+"+cost.getMoney().toString());
+            holder.imageView.setImageResource(R.drawable.income);
+            holder.number.setTextColor(0xff096605);}
+        holder.date.setText(sdf.format(cost.getDate()));
     }
 
     @Override
@@ -49,12 +57,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         ImageView imageView;
         TextView textView;
         TextView number;
-
+        TextView date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
             textView = itemView.findViewById(R.id.textview);
             number = itemView.findViewById(R.id.number);
+            date=itemView.findViewById(R.id.date);
         }
 
 

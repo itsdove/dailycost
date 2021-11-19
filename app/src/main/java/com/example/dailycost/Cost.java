@@ -1,12 +1,22 @@
 package com.example.dailycost;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Cost {
     Double money;
     Date date;
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
     int cost;
     int Imagid;
+    String reason;
     public  Cost(Double m){
         money=m;
     }

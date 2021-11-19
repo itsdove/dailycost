@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -19,8 +22,11 @@ import com.example.dailycost.Cost;
 import com.example.dailycost.R;
 import com.example.dailycost.SpacesItemDecoration;
 import com.example.dailycost.databinding.FragmentHomeBinding;
+import com.example.dailycost.databinding.FragmentNotificationsBinding;
+import com.example.dailycost.ui.notifications.NotificationsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,12 +38,13 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     Adapter adapter;
     private int mSelectPosition;
+    View root;
     FloatingActionButton floatingActionButton;
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -53,12 +60,20 @@ public class HomeFragment extends Fragment {
                 alertDialog.setPositiveButton("确定",new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                      EditText editText=dialagueView.findViewById(R.id.ed1);
-                    Cost cost=new Cost(Double.parseDouble(editText.getText().toString()));
-                    cost.setImagid(R.drawable.pay);
-                    cost.setCost(1);
-                    costs.add(cost);
-                   adapter.notifyItemChanged(mSelectPosition);
+                        EditText editText=dialagueView.findViewById(R.id.ed);
+                        EditText editText1=dialagueView.findViewById(R.id.ed1);
+                        RadioGroup radgroup = (RadioGroup)dialagueView.findViewById(R.id.radioGroup);
+                        RadioButton rd = (RadioButton) radgroup.getChildAt(0);
+                        Cost cost=new Cost(Double.parseDouble(editText1.getText().toString()));
+                        cost.setImagid(R.drawable.pay);
+                        if(rd.isChecked())
+                        cost.setCost(1);
+                        else
+                            cost.setCost(0);
+                        cost.setDate(new Date());
+                        cost.setReason(editText.getText().toString());
+                        costs.add(cost);
+                        adapter.notifyItemChanged(mSelectPosition);
                     }
                 });
                 alertDialog.setCancelable(false).setNegativeButton ("取消",new DialogInterface.OnClickListener(){
@@ -77,6 +92,7 @@ public class HomeFragment extends Fragment {
         int space = 8;
         recyclerView.addItemDecoration(new SpacesItemDecoration(space));
         return root;
+       
     }
 
     @Override

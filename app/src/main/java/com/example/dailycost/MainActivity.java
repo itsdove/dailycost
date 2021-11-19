@@ -2,12 +2,21 @@ package com.example.dailycost;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.dailycost.ui.dashboard.DashboardFragment;
+import com.example.dailycost.ui.home.HomeFragment;
+import com.example.dailycost.ui.notifications.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,14 +27,16 @@ import com.example.dailycost.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
+    private HomeFragment homeFragment;
+    private DashboardFragment dashboardFragment;
+    private NotificationsFragment notificationsFragment;
+    private Fragment isFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         BottomNavigationView navView = findViewById(R.id.nav_views);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
