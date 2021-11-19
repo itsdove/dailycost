@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment {
                     cost.save();
                     adapter.notifyItemChanged(mSelectPosition);
                 });
-                alertDialog.setCancelable(false).setNegativeButton("取消", (dialogInterface, i) -> {
+                alertDialog.setCancelable(false).setNegativeButton("取消1", (dialogInterface, i) -> {
                 });
                 alertDialog.create().show();
             });
