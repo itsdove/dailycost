@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.dailycost.R;
 import com.example.dailycost.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment {

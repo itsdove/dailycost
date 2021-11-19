@@ -22,21 +22,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.dailycost.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
-    private HomeFragment homeFragment;
-    private DashboardFragment dashboardFragment;
-    private NotificationsFragment notificationsFragment;
-    private Fragment isFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_views);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -45,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navViews, navController);
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
 }
