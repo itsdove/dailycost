@@ -1,6 +1,5 @@
 package com.example.dailycost.ui.home;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,11 +30,10 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
-   static private List<Cost> costs= new LinkedList<>();;
+   static private List<Cost> costs= new LinkedList<>();
     RecyclerView recyclerView;
     Adapter adapter;
     private int mSelectPosition;
-    View root;
     FloatingActionButton floatingActionButton;
 
     @Override
@@ -45,40 +43,31 @@ public class HomeFragment extends Fragment {
             homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
             binding = FragmentHomeBinding.inflate(inflater, container, false);
             View root = binding.getRoot();
-            floatingActionButton = (FloatingActionButton) root.findViewById(R.id.fbutton);
-            floatingActionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    View dialagueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogview, null);
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                    alertDialog.setView(dialagueView);
+            floatingActionButton = root.findViewById(R.id.fbutton);
+            floatingActionButton.setOnClickListener(view -> {
+                View dialagueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogview, null);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setView(dialagueView);
 
-                    alertDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            EditText editText = dialagueView.findViewById(R.id.ed);
-                            EditText editText1 = dialagueView.findViewById(R.id.ed1);
-                            RadioGroup radgroup = (RadioGroup) dialagueView.findViewById(R.id.radioGroup);
-                            RadioButton rd = (RadioButton) radgroup.getChildAt(0);
-                            Cost cost = new Cost(Double.parseDouble(editText1.getText().toString()));
-                            cost.setImagid(R.drawable.pay);
-                            if (rd.isChecked())
-                                cost.setCost(1);
-                            else
-                                cost.setCost(0);
-                            cost.setDate(new Date());
-                            cost.setReason(editText.getText().toString());
-                            costs.add(cost);
-                            adapter.notifyItemChanged(mSelectPosition);
-                        }
-                    });
-                    alertDialog.setCancelable(false).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
-                    });
-                    alertDialog.create().show();
-                }
+                alertDialog.setPositiveButton("确定", (dialogInterface, i) -> {
+                    EditText editText = dialagueView.findViewById(R.id.ed);
+                    EditText editText1 = dialagueView.findViewById(R.id.ed1);
+                    RadioGroup radgroup =  dialagueView.findViewById(R.id.radioGroup);
+                    RadioButton rd = (RadioButton) radgroup.getChildAt(0);
+                    Cost cost = new Cost(Double.parseDouble(editText1.getText().toString()));
+                    cost.setImagid(R.drawable.pay);
+                    if (rd.isChecked())
+                        cost.setCost(1);
+                    else
+                        cost.setCost(0);
+                    cost.setDate(new Date());
+                    cost.setReason(editText.getText().toString());
+                    costs.add(cost);
+                    adapter.notifyItemChanged(mSelectPosition);
+                });
+                alertDialog.setCancelable(false).setNegativeButton("取消", (dialogInterface, i) -> {
+                });
+                alertDialog.create().show();
             });
             recyclerView = root.findViewById(R.id.recycleview);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
