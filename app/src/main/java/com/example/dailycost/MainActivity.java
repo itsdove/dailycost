@@ -9,13 +9,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import org.litepal.LitePal;
+
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        LitePal.initialize(this);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_views);
         // Passing each menu ID as a set of Ids because each

@@ -1,25 +1,19 @@
 package com.example.dailycost;
 
+import org.litepal.crud.LitePalSupport;
 import java.util.Date;
 
-public class Cost {
+public class Cost extends LitePalSupport {
     Double money;
     Date date;
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
-
     int cost;
     int Imagid;
     String reason;
+
     public  Cost(Double m){
         money=m;
     }
+
     public int getImagid() {
         return Imagid;
     }
@@ -50,5 +44,13 @@ public class Cost {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

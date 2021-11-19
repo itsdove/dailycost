@@ -1,6 +1,7 @@
 package com.example.dailycost.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.example.dailycost.databinding.FragmentHomeBinding;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.litepal.LitePal;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,7 +33,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
-   static private List<Cost> costs= new LinkedList<>();
+    private List<Cost> costs= new LinkedList<>();
     RecyclerView recyclerView;
     Adapter adapter;
     private int mSelectPosition;
@@ -39,7 +42,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+            LitePal.getDatabase();
             homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
             binding = FragmentHomeBinding.inflate(inflater, container, false);
             View root = binding.getRoot();
@@ -63,12 +66,15 @@ public class HomeFragment extends Fragment {
                     cost.setDate(new Date());
                     cost.setReason(editText.getText().toString());
                     costs.add(cost);
+                    cost.save();
                     adapter.notifyItemChanged(mSelectPosition);
                 });
                 alertDialog.setCancelable(false).setNegativeButton("取消", (dialogInterface, i) -> {
                 });
                 alertDialog.create().show();
             });
+
+            costs=LitePal.findAll(Cost.class);
             recyclerView = root.findViewById(R.id.recycleview);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
@@ -76,13 +82,12 @@ public class HomeFragment extends Fragment {
             recyclerView.setAdapter(adapter);
             recyclerView.addItemDecoration(new SpacesItemDecoration(8));
              return root;
-
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding=null;
+
     }
 }
