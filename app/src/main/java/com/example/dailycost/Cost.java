@@ -1,11 +1,25 @@
 package com.example.dailycost;
 
+
 import org.litepal.crud.LitePalSupport;
+
+import java.sql.Timestamp;
 import java.util.Date;
+
 
 public class Cost extends LitePalSupport {
     Double money;
     Date date;
+
+    public int getM() {
+        return m;
+    }
+
+    public void setM(int m) {
+        this.m = m;
+    }
+
+    int m;
     int cost;
     int Imagid;
     String reason;

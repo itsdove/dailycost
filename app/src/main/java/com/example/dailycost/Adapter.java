@@ -2,6 +2,8 @@ package com.example.dailycost;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
@@ -36,7 +41,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         Cost cost= costs.get(position);
         holder.imageView.setImageResource(cost.getImagid());
         holder.textView.setText(cost.getReason());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if(cost.getCost()==1)
         { holder.number.setText("-"+cost.getMoney().toString());
         holder.imageView.setImageResource(R.drawable.pay);
@@ -45,7 +49,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         { holder.number.setText("+"+cost.getMoney().toString());
             holder.imageView.setImageResource(R.drawable.income);
             holder.number.setTextColor(0xff096605);}
-        holder.date.setText(sdf.format(cost.getDate()));
+            Log.d("asdasdad",cost.getDate()+" ");
+            holder.date.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(cost.getDate()));
     }
 
     @Override

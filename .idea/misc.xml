@@ -14,7 +14,7 @@
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/dialogview.xml" value="0.4" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_notifications.xml" value="0.4036458333333333" />
+        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_notifications.xml" value="0.13365155131264916" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/icon.xml" value="0.11503623188405797" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/itemlayout.xml" value="0.264" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/menu/bottom_nav_menu.xml" value="0.4036458333333333" />
@@ -26,5 +26,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
   </component>
 </project>

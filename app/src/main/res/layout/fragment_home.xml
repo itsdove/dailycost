@@ -1,23 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
-    >
-
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/recycleview"
-   ></androidx.recyclerview.widget.RecyclerView>
+    android:orientation="vertical">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fbutton"
-        android:src="@drawable/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="20dp"></com.google.android.material.floatingactionbutton.FloatingActionButton>
-</FrameLayout>
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llayout"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    <Spinner
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:theme="@style/life_spinner_style"
+        android:entries="@array/spingarr"
+    ></Spinner>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:id="@+id/sum"
+        android:layout_gravity="right"
+        android:textSize="25dp"
+        android:gravity="right"
+        android:layout_height="wrap_content"
+    ></TextView>
+    </LinearLayout>
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/llayout"
+    android:id="@+id/recycleview"
+   ></androidx.recyclerview.widget.RecyclerView>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
