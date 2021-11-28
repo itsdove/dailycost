@@ -1,5 +1,6 @@
 package com.example.dailycost.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -32,11 +34,14 @@ import org.litepal.LitePal;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import com.google.type.DateTime;
-public class HomeFragment extends Fragment {
+import com.nex3z.flowlayout.FlowLayout;
+
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
@@ -47,9 +52,18 @@ public class HomeFragment extends Fragment {
     private int mSelectPosition;
     Double pay=0.0;
     Double income=0.0;
+    TextView t1;
+    TextView t2;
+    TextView t3;
+    TextView t4;
+    TextView t5;
+    EditText editText ;
     FloatingActionButton floatingActionButton;
     Spinner spinner;
     int m;
+    FlowLayout flowLayout;
+    List<Boolean> list;
+    View dialagueView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +73,7 @@ public class HomeFragment extends Fragment {
             View root = binding.getRoot();
             sum=root.findViewById(R.id.sum);
             spinner=root.findViewById(R.id.spinner);
+
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -84,17 +99,34 @@ public class HomeFragment extends Fragment {
 
             }
         });
-                floatingActionButton = root.findViewById(R.id.fbutton);
-                floatingActionButton.setOnClickListener(view -> {
-                View dialagueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogview, null);
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                alertDialog.setView(dialagueView);
+                  floatingActionButton = root.findViewById(R.id.fbutton);
+                  floatingActionButton.setOnClickListener(view -> {
+                  dialagueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogview, null);
+                  AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                 alertDialog.setView(dialagueView);
+                  flowLayout=dialagueView.findViewById(R.id.flow);
+                  t1=dialagueView.findViewById(R.id.s1);
+                  t2=dialagueView.findViewById(R.id.s2);
+                   t3=dialagueView.findViewById(R.id.s3);
+                   t4=dialagueView.findViewById(R.id.s4);
+                   t5=dialagueView.findViewById(R.id.s5);
+                     t1.setOnClickListener(this);
+                     t2.setOnClickListener(this);
+                     t3.setOnClickListener(this);
+                     t4.setOnClickListener(this);
+                     t5.setOnClickListener(this);
+                    list=new ArrayList(flowLayout.getChildCount());
+                    list.add(false);
+                    list.add(false);
+                    list.add(false);
+                    list.add(false);
+                    list.add(false);
+                    editText = dialagueView.findViewById(R.id.ed);
                 alertDialog.setPositiveButton("确定", (dialogInterface, i) -> {
-                    EditText editText = dialagueView.findViewById(R.id.ed);
                     EditText editText1 = dialagueView.findViewById(R.id.ed1);
                     RadioGroup radgroup =  dialagueView.findViewById(R.id.radioGroup);
-                    RadioButton rd = (RadioButton) radgroup.getChildAt(0);
-                    Double money=Double.parseDouble(editText1.getText().toString());
+                    RadioButton rd = dialagueView.findViewById(R.id.btn1);
+                    Double money = Double.parseDouble(editText1.getText().toString());
                     Cost cost = new Cost(money);
                     if (rd.isChecked())
                     {cost.setCost(1);
@@ -129,6 +161,34 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding=null;
+
+    }
+
+    @SuppressLint("ResourceType")
+    @Override
+    public void onClick(View v) {
+        TextView t=dialagueView.findViewById(v.getId());
+        int x=v.getId()-t1.getId();
+             if(!list.get(x))
+              {list.set(x,true);
+                  t.setBackgroundResource(R.drawable.tag1);
+                  editText.setText(t.getText());
+                  t1.setVisibility(View.INVISIBLE);
+                  t2.setVisibility(View.INVISIBLE);
+                  t3.setVisibility(View.INVISIBLE);
+                  t4.setVisibility(View.INVISIBLE);
+                  t5.setVisibility(View.INVISIBLE);
+                  t.setVisibility(View.VISIBLE);
+              }
+              else
+              {list.set(x,false);
+               t.setBackgroundResource(R.drawable.tag);
+                  editText.setText("");
+                  t1.setVisibility(View.VISIBLE);
+                  t2.setVisibility(View.VISIBLE);
+                  t3.setVisibility(View.VISIBLE);
+                  t4.setVisibility(View.VISIBLE);
+                  t5.setVisibility(View.VISIBLE);}
 
     }
 }

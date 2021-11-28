@@ -4,17 +4,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.notifications.NotificationsFragment">
 
 
     <org.eazegraph.lib.charts.PieChart
+        android:paddingTop="20dp"
         android:id="@+id/piechart"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="465dp" />
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:layout_weight="1"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="15dp"
-        />
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center">
+
+            <!--View to display the yellow color icon-->
+            <View
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="#FFA726"/>
+
+            <!--Text view to display R -->
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交通"
+                android:id="@+id/c1"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+
+        <!--Linear layout to display Python-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+
+            <!--View to display the green color icon-->
+            <View
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="#66BB6A"/>
+
+            <!--Text view to display python text -->
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="餐饮"
+                android:id="@+id/c2"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+
+        <!--Linear layout to display C++-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+
+            <!--View to display the red color icon-->
+            <View
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="#EF5350"/>
+
+            <!--Text view to display C++ text -->
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="衣服"
+                android:id="@+id/c3"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+
+        <!--Linear layout to display Java-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+
+            <!--View to display the blue color icon-->
+            <View
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="#29B6F6"/>
+
+            <!--Text view to display Java text -->
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="话费"
+                android:id="@+id/c4"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+
+            <!--View to display the blue color icon-->
+            <View
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="#FF00FF"/>
+
+            <!--Text view to display Java text -->
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="房租"
+                android:id="@+id/c5"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp">
+
+            <!--View to display the blue color icon-->
+            <View
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="#ebe437"/>
+
+            <!--Text view to display Java text -->
+            <TextView
+                android:id="@+id/c6"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他"
+                android:paddingLeft="10dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
