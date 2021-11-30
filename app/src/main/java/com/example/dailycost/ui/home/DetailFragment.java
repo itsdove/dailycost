@@ -1,14 +1,11 @@
 package com.example.dailycost.ui.home;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -16,7 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,33 +21,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dailycost.Adapter;
 import com.example.dailycost.Cost;
 import com.example.dailycost.R;
-import com.example.dailycost.SpacesItemDecoration;
 import com.example.dailycost.databinding.FragmentHomeBinding;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.litepal.LitePal;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import com.google.type.DateTime;
+
 import com.nex3z.flowlayout.FlowLayout;
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class DetailFragment extends Fragment implements View.OnClickListener{
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
     private List<Cost> costs= new LinkedList<>();
     RecyclerView recyclerView;
     Adapter adapter;
-    TextView sum;
+    static TextView sum;
     private int mSelectPosition;
-    Double pay=0.0;
-    Double income=0.0;
+    static Double pay=0.0;
+    static Double income=0.0;
     TextView t1;
     TextView t2;
     TextView t3;
@@ -73,7 +66,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             View root = binding.getRoot();
             sum=root.findViewById(R.id.sum);
             spinner=root.findViewById(R.id.spinner);
-
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -124,7 +116,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     editText = dialagueView.findViewById(R.id.ed);
                 alertDialog.setPositiveButton("确定", (dialogInterface, i) -> {
                     EditText editText1 = dialagueView.findViewById(R.id.ed1);
-                    RadioGroup radgroup =  dialagueView.findViewById(R.id.radioGroup);
                     RadioButton rd = dialagueView.findViewById(R.id.btn1);
                     Double money = Double.parseDouble(editText1.getText().toString());
                     Cost cost = new Cost(money);
@@ -190,5 +181,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                   t4.setVisibility(View.VISIBLE);
                   t5.setVisibility(View.VISIBLE);}
 
+    }
+
+    public static void update(double money,int i){
+        if(i==1)
+        pay-=money;
+        else
+            income-=money;
+        sum.setText("支出:￥"+pay+"收入:￥"+income);
     }
 }

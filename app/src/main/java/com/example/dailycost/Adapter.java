@@ -1,20 +1,31 @@
 package com.example.dailycost;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.example.dailycost.ui.home.DetailFragment;
+
+import org.litepal.LitePal;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -58,7 +69,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         return costs.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements MenuItem.OnMenuItemClickListener,View.OnCreateContextMenuListener {
         ImageView imageView;
         TextView textView;
         TextView number;
@@ -69,9 +80,62 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             textView = itemView.findViewById(R.id.textview);
             number = itemView.findViewById(R.id.number);
             date=itemView.findViewById(R.id.date);
+            itemView.setOnCreateContextMenuListener(this);
         }
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem menuItem1 = menu.add(Menu.NONE, 1, 1, "修改");
+            menuItem1.setOnMenuItemClickListener(this);
+            MenuItem menuItem2 = menu.add(Menu.NONE, 2, 2, "删除");
+            menuItem2.setOnMenuItemClickListener(this);
+        }
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem){
+            int position=getAdapterPosition();
+            switch (menuItem.getItemId()){
+                case 1:
+                    View dialagueView= LayoutInflater.from(mcontext).inflate(R.layout.dialogview,null);
+                    AlertDialog.Builder alertDialog=new AlertDialog.Builder(mcontext);
+                    alertDialog.setView(dialagueView);
+                    EditText editText1 = dialagueView.findViewById(R.id.ed1);
+                    EditText editText = dialagueView.findViewById(R.id.ed);
+                    RadioButton rd = dialagueView.findViewById(R.id.btn1);
+                    editText.setText(costs.get(position).getReason());
+                    editText1.setText(costs.get(position).getMoney().toString());
+                    Cost cost=costs.get(position);
+                    rd.setChecked(cost.getCost()==1);
+                    double m=cost.getMoney();
+                    alertDialog.setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
+                            cost.setMoney(Double.parseDouble(editText1.getText().toString()));
+                            cost.setReason(editText.getText().toString());
+                            cost.setCost(rd.isChecked()?1:0);
+                            costs.set(position,cost);
+                            cost.save();
+                            DetailFragment.update(m-cost.getMoney(),cost.getCost());
+                            Adapter.this.notifyItemChanged(position);
+                        }
+                    });
+                    alertDialog.setCancelable(false).setNegativeButton ("取消",new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+                    alertDialog.create().show();
+                    break;
+                case 2:
+                    cost=costs.get(position);
+                    costs.remove(position);
+                    Adapter.this.notifyItemRemoved(position);
+                    DetailFragment.update(cost.getMoney(),cost.getCost());
+                    cost.delete();
 
+                    break;
+
+            }
+            return true;
+        }
 
     }
 }

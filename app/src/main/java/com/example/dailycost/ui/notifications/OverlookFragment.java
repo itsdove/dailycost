@@ -23,7 +23,7 @@ import org.litepal.LitePal;
 
 import java.util.List;
 
-public class NotificationsFragment extends Fragment {
+public class OverlookFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
     private FragmentNotificationsBinding binding;
@@ -94,6 +94,8 @@ public class NotificationsFragment extends Fragment {
         TextView textView3=root.findViewById(R.id.c3);
         TextView textView4=root.findViewById(R.id.c4);
         TextView textView5=root.findViewById(R.id.c5);
+        TextView sum=root.findViewById(R.id.sum);
+        sum.setText("总支出:￥"+allmoney);
         textView1.setText(textView1.getText()+""+(int)(money1/allmoney*100)+"%");
         textView2.setText(textView2.getText()+""+(int)(money2/allmoney*100)+"%");
         textView3.setText(textView3.getText()+""+(int)(money3/allmoney*100)+"%");

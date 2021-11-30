@@ -8,8 +8,13 @@ import java.util.Date;
 
 
 public class Cost extends LitePalSupport {
+
     Double money;
     Date date;
+    int m;
+    int cost;
+    int Imagid;
+    String reason;
 
     public int getM() {
         return m;
@@ -18,11 +23,6 @@ public class Cost extends LitePalSupport {
     public void setM(int m) {
         this.m = m;
     }
-
-    int m;
-    int cost;
-    int Imagid;
-    String reason;
 
     public  Cost(Double m){
         money=m;

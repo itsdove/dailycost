@@ -1,4 +1,4 @@
-package com.example.dailycost;
+package com.example.dailycost.ui.home;
 
 import android.graphics.Rect;
 import android.view.View;
