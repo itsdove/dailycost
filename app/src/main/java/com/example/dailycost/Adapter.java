@@ -98,23 +98,28 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
                     alertDialog.setView(dialagueView);
                     EditText editText1 = dialagueView.findViewById(R.id.ed1);
                     EditText editText = dialagueView.findViewById(R.id.ed);
-                    RadioButton rd = dialagueView.findViewById(R.id.btn1);
-                    editText.setText(costs.get(position).getReason());
-                    editText1.setText(costs.get(position).getMoney().toString());
+                    RadioButton rd1 = dialagueView.findViewById(R.id.btn1);
+                    RadioButton rd2 = dialagueView.findViewById(R.id.btn2);
                     Cost cost=costs.get(position);
-                    rd.setChecked(cost.getCost()==1);
+                    editText.setText(cost.getReason());
+                    editText1.setText(cost.getMoney().toString());
+                    if(cost.getCost()==1)
+                        rd1.setChecked(true);
+                    else
+                        rd2.setChecked(true);
                     double m=cost.getMoney();
+                    int n=cost.getCost();
                     alertDialog.setPositiveButton("确定",new DialogInterface.OnClickListener(){
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
                             cost.setMoney(Double.parseDouble(editText1.getText().toString()));
                             cost.setReason(editText.getText().toString());
-                            cost.setCost(rd.isChecked()?1:0);
+                            cost.setCost(rd1.isChecked()?1:0);
                             costs.set(position,cost);
                             cost.save();
-                            DetailFragment.update(m-cost.getMoney(),cost.getCost());
                             Adapter.this.notifyItemChanged(position);
+                            DetailFragment.update(n,m,cost.getCost(),cost.getMoney());
                         }
                     });
                     alertDialog.setCancelable(false).setNegativeButton ("取消",new DialogInterface.OnClickListener(){
@@ -128,7 +133,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
                     cost=costs.get(position);
                     costs.remove(position);
                     Adapter.this.notifyItemRemoved(position);
-                    DetailFragment.update(cost.getMoney(),cost.getCost());
+                    DetailFragment.update(cost.getCost(),cost.getMoney(),1,0.0);
                     cost.delete();
 
                     break;

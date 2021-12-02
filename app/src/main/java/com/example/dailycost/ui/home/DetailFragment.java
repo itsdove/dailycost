@@ -54,7 +54,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     FloatingActionButton floatingActionButton;
     Spinner spinner;
     int m;
-    FlowLayout flowLayout;
+
     List<Boolean> list;
     View dialagueView;
     @Override
@@ -96,7 +96,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                   dialagueView = LayoutInflater.from(getContext()).inflate(R.layout.dialogview, null);
                   AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                  alertDialog.setView(dialagueView);
-                  flowLayout=dialagueView.findViewById(R.id.flow);
                   t1=dialagueView.findViewById(R.id.s1);
                   t2=dialagueView.findViewById(R.id.s2);
                    t3=dialagueView.findViewById(R.id.s3);
@@ -107,7 +106,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
                      t3.setOnClickListener(this);
                      t4.setOnClickListener(this);
                      t5.setOnClickListener(this);
-                    list=new ArrayList(flowLayout.getChildCount());
+                    list=new ArrayList(5);
                     list.add(false);
                     list.add(false);
                     list.add(false);
@@ -183,11 +182,23 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
     }
 
-    public static void update(double money,int i){
-        if(i==1)
-        pay-=money;
-        else
-            income-=money;
+    public static void update(int y,double my,int i,double money){
+        switch (y){
+            case 1:if(i==1)
+                pay-=(my-money);
+
+            else
+                pay-=my;
+                income+=money;
+                break;
+            case 0:
+                if(i==1)
+                { pay+=money;
+                income-=my; }
+                else
+                pay-=(my-money);
+                break;
+        }
         sum.setText("支出:￥"+pay+"收入:￥"+income);
     }
 }
