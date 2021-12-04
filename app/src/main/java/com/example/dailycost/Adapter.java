@@ -30,6 +30,7 @@ import org.litepal.LitePal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
@@ -93,14 +94,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             int position=getAdapterPosition();
             switch (menuItem.getItemId()){
                 case 1:
-                    View dialagueView= LayoutInflater.from(mcontext).inflate(R.layout.dialogview,null);
+                    View dialagueView = LayoutInflater.from(mcontext).inflate(R.layout.dialogview, null);
                     AlertDialog.Builder alertDialog=new AlertDialog.Builder(mcontext);
                     alertDialog.setView(dialagueView);
+                    TextView t1=dialagueView.findViewById(R.id.s1);
+                    TextView t2=dialagueView.findViewById(R.id.s2);
+                    TextView t3=dialagueView.findViewById(R.id.s3);
+                    TextView t4=dialagueView.findViewById(R.id.s4);
+                    TextView  t5=dialagueView.findViewById(R.id.s5);
                     EditText editText1 = dialagueView.findViewById(R.id.ed1);
                     EditText editText = dialagueView.findViewById(R.id.ed);
                     RadioButton rd1 = dialagueView.findViewById(R.id.btn1);
                     RadioButton rd2 = dialagueView.findViewById(R.id.btn2);
                     Cost cost=costs.get(position);
+                    switch (cost.getReason()){
+                        case "交通": t1.setBackgroundResource(R.drawable.tag1);break;
+                        case "餐饮": t2.setBackgroundResource(R.drawable.tag1);break;
+                        case "衣服": t3.setBackgroundResource(R.drawable.tag1);break;
+                        case "花费": t4.setBackgroundResource(R.drawable.tag1);break;
+                        case "房租": t5.setBackgroundResource(R.drawable.tag1);break;
+                    }
                     editText.setText(cost.getReason());
                     editText1.setText(cost.getMoney().toString());
                     if(cost.getCost()==1)
@@ -141,6 +154,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             }
             return true;
         }
-
     }
 }
