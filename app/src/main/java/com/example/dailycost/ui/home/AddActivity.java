@@ -22,6 +22,7 @@ public class AddActivity extends AppCompatActivity {
         Intent intent1=getIntent();
         String r1=intent1.getStringExtra("reason");
         String m1=String.valueOf(intent1.getDoubleExtra("money",0.0));
+        if(!m1.equals("0.0"))
         money.setText(m1);
         reason.setText(r1);
         final int[] i = {0};

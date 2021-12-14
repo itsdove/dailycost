@@ -8,11 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.example.dailycost.Cost;
 import com.example.dailycost.R;
 import com.example.dailycost.databinding.FragmentNotificationsBinding;
@@ -21,19 +17,14 @@ import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 import org.litepal.LitePal;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OverlookFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
     private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
-
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         PieChart pieChart=root.findViewById(R.id.piechart);
@@ -45,7 +36,6 @@ public class OverlookFragment extends Fragment {
         }
         for(Cost c:l){
             allmoney+=c.getMoney();
-          
             if(c.getReason().equals("交通出行"))
                 money[1]+=c.getMoney();
             if(c.getReason().equals("吃喝饮食"))

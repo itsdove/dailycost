@@ -1,7 +1,6 @@
 package com.example.dailycost.ui.home;
 
 import static android.app.Activity.RESULT_OK;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -45,10 +44,9 @@ public class DetailFragment extends Fragment{
     private List<Cost> costs= new LinkedList<>();
     RecyclerView recyclerView;
     Adapter adapter;
-     TextView sum;
-    private int mSelectPosition;
-     Double pay=0.0;
-     Double income=0.0;
+    TextView sum;
+    Double pay=0.0;
+    Double income=0.0;
     FloatingActionButton floatingActionButton;
     Spinner spinner;
     int m;
@@ -85,9 +83,9 @@ public class DetailFragment extends Fragment{
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-                  floatingActionButton = root.findViewById(R.id.fbutton);
-                  floatingActionButton.setOnClickListener(view -> {
+            });
+            floatingActionButton = root.findViewById(R.id.fbutton);
+            floatingActionButton.setOnClickListener(view -> {
                       Intent intent=new Intent(getContext(),AddActivity.class);
                       launcherAdd.launch(intent);
             });
@@ -98,8 +96,7 @@ public class DetailFragment extends Fragment{
             adapter = new Adapter(costs);
             recyclerView.setAdapter(adapter);
             recyclerView.addItemDecoration(new SpacesItemDecoration(8));
-
-             return root;
+            return root;
     }
     ActivityResultLauncher<Intent> launcherAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -165,7 +162,6 @@ public class DetailFragment extends Fragment{
 
  class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     List<Cost> costs;
-    private Context mcontext;
 
     public Adapter(List<Cost> costList) {
         this.costs = costList;
@@ -173,7 +169,6 @@ public class DetailFragment extends Fragment{
 
     @Override
     public Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        mcontext = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemlayout, parent, false);
         return new Adapter.ViewHolder(view);
     }
@@ -211,12 +206,20 @@ public class DetailFragment extends Fragment{
             textView = itemView.findViewById(R.id.textview);
             number = itemView.findViewById(R.id.number);
             date = itemView.findViewById(R.id.date);
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                Intent intent=new Intent(getContext(),AddActivity.class);
+                intent.putExtra("why",1);
+                intent.putExtra("pos",position);
+                intent.putExtra("money",costs.get(position).getMoney());
+                intent.putExtra("reason",costs.get(position).getReason());
+                intent.putExtra("ima",costs.get(position).getImagid());
+                launcherAdd.launch(intent);
+            });
             itemView.setOnCreateContextMenuListener(this);
         }
 
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            MenuItem menuItem1 = menu.add(Menu.NONE, 1, 1, "修改");
-            menuItem1.setOnMenuItemClickListener(this);
             MenuItem menuItem2 = menu.add(Menu.NONE, 2, 2, "删除");
             menuItem2.setOnMenuItemClickListener(this);
         }
@@ -224,24 +227,12 @@ public class DetailFragment extends Fragment{
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             int position = getAdapterPosition();
-            switch (menuItem.getItemId()) {
-                case 1:
-                    Intent intent=new Intent(getContext(),AddActivity.class);
-                    intent.putExtra("why",1);
-                    intent.putExtra("pos",position);
-                    intent.putExtra("money",costs.get(position).getMoney());
-                    intent.putExtra("reason",costs.get(position).getReason());
-                    intent.putExtra("ima",costs.get(position).getImagid());
-                    launcherAdd.launch(intent);
-                    break;
-                case 2:
-                    Cost cost = costs.get(position);
-                    costs.remove(position);
-                    adapter.notifyItemRemoved(position);
-                    update(cost.getCost(), cost.getMoney(), 1, 0.0);
-                    cost.delete();
-                    break;
-            }
+            Cost cost = costs.get(position);
+            costs.remove(position);
+            adapter.notifyItemRemoved(position);
+            update(cost.getCost(), cost.getMoney(), 1, 0.0);
+            cost.delete();
+
             return true;
         }
 

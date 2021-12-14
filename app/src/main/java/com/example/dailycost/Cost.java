@@ -1,9 +1,6 @@
 package com.example.dailycost;
 
-
 import org.litepal.crud.LitePalSupport;
-
-import java.sql.Timestamp;
 import java.util.Date;
 
 
