@@ -13,7 +13,7 @@ public class Cost extends LitePalSupport {
     Date date;
     int m;
     int cost;
-    int Imagid;
+    public int Imagid;
     String reason;
 
     public int getM() {
