@@ -71,7 +71,7 @@ public class AddActivity extends AppCompatActivity {
         });
         findViewById(R.id.l10).setOnClickListener(v -> {
             reason.setText("医疗用品");
-            i[0] =R.drawable.travel;
+            i[0] =R.drawable.hospital;
         });
         findViewById(R.id.l11).setOnClickListener(v -> {
             reason.setText("日常用品");

@@ -14,8 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="465dp" />
     <LinearLayout
-        android:paddingTop="15dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
@@ -24,90 +29,79 @@
             android:layout_height="30dp"
             android:layout_gravity="center">
 
-            <!--View to display the yellow color icon-->
             <View
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:background="#FFA726"/>
 
-            <!--Text view to display R -->
             <TextView
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="交通"
+                android:text="交通出行"
                 android:id="@+id/c1"
                 android:paddingLeft="10dp"/>
 
         </LinearLayout>
 
-        <!--Linear layout to display Python-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp">
 
-            <!--View to display the green color icon-->
             <View
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:background="#66BB6A"/>
 
-            <!--Text view to display python text -->
             <TextView
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="餐饮"
+                android:text="吃喝饮食"
                 android:id="@+id/c2"
                 android:paddingLeft="10dp"/>
 
         </LinearLayout>
 
-        <!--Linear layout to display C++-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp">
 
-            <!--View to display the red color icon-->
             <View
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:background="#EF5350"/>
 
-            <!--Text view to display C++ text -->
             <TextView
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="衣服"
+                android:text="通讯费用"
                 android:id="@+id/c3"
                 android:paddingLeft="10dp"/>
 
         </LinearLayout>
 
-        <!--Linear layout to display Java-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp">
 
-            <!--View to display the blue color icon-->
             <View
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:background="#29B6F6"/>
 
-            <!--Text view to display Java text -->
             <TextView
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="话费"
+                android:text="房租水电"
                 android:id="@+id/c4"
                 android:paddingLeft="10dp"/>
 
@@ -118,18 +112,16 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp">
 
-            <!--View to display the blue color icon-->
             <View
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:background="#FF00FF"/>
 
-            <!--Text view to display Java text -->
             <TextView
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="房租"
+                android:text="消费购物"
                 android:id="@+id/c5"
                 android:paddingLeft="10dp"/>
 
@@ -139,22 +131,127 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp">
-
-            <!--View to display the blue color icon-->
             <View
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:background="#ebe437"/>
 
-            <!--Text view to display Java text -->
             <TextView
                 android:id="@+id/c6"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="其他"
+                android:text="运动健身"
                 android:paddingLeft="10dp"/>
 
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+            android:paddingTop="15dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center">
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="#000080"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="旅游出行"
+                    android:id="@+id/c7"
+                    android:paddingLeft="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="#6A5ACD"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="基金理财"
+                    android:id="@+id/c8"
+                    android:paddingLeft="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="#8B8989"/>
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="医疗用品"
+                    android:id="@+id/c9"
+                    android:paddingLeft="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="#FF0000"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日常用品"
+                    android:id="@+id/c10"
+                    android:paddingLeft="10dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:background="#FFE1FF"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="其他"
+                    android:id="@+id/c11"
+                    android:paddingLeft="10dp"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <TextView
