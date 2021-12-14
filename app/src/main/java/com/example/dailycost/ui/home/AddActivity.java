@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.dailycost.R;
 
@@ -80,6 +81,7 @@ public class AddActivity extends AppCompatActivity {
         });
 
         button.setOnClickListener(v -> {
+            if(!"".equals(money.getText().toString().trim())){
             int why=intent1.getIntExtra("why",0);
             Intent intent=new Intent();
             intent.putExtra("money",Double.parseDouble(money.getText().toString()));
@@ -90,7 +92,10 @@ public class AddActivity extends AppCompatActivity {
                 setResult(RESULT_CANCELED,intent);}
             else
             setResult(RESULT_OK,intent);
-            finish();
+            finish();}
+            else{
+                Toast.makeText(getApplicationContext(),"请输入金额",Toast.LENGTH_SHORT).show();
+            }
         });
 
     }

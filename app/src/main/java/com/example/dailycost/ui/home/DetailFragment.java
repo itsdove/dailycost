@@ -102,6 +102,9 @@ public class DetailFragment extends Fragment{
         @Override
         public void onActivityResult(ActivityResult result) {
             Intent data = result.getData();
+            if(data.getDoubleExtra("money",0)==0.0) {
+            return;
+            }
             int resultCode = result.getResultCode();
             if(resultCode==RESULT_OK){
                 if(null==data)return;
