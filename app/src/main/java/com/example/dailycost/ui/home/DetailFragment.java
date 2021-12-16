@@ -10,9 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResult;
@@ -27,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dailycost.Cost;
 import com.example.dailycost.R;
-import com.example.dailycost.databinding.FragmentHomeBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.litepal.LitePal;
@@ -40,7 +37,6 @@ import java.util.List;
 
 public class DetailFragment extends Fragment{
 
-    private FragmentHomeBinding binding;
     private List<Cost> costs= new LinkedList<>();
     RecyclerView recyclerView;
     Adapter adapter;
@@ -48,49 +44,40 @@ public class DetailFragment extends Fragment{
     Double pay=0.0;
     Double income=0.0;
     FloatingActionButton floatingActionButton;
-    Spinner spinner;
     int m;
-
+    int position;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-            LitePal.getDatabase();
-            binding = FragmentHomeBinding.inflate(inflater, container, false);
-            View root = binding.getRoot();
-            sum=root.findViewById(R.id.sum);
-            spinner=root.findViewById(R.id.spinner);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //选择了不同的选项，调用这个
-                m=position;
-                pay=0.0;
-                income=0.0;
-                costs.clear();
-                for(Cost c:LitePal.findAll(Cost.class)){
-                    if(c.getM()==(position))
-                    {costs.add(c);
-                        if(c.getCost()==1)
-                            pay+=c.getMoney();
-                        else
-                            income+=c.getMoney();}
+        LitePal.getDatabase();
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        Bundle bundle = getArguments();
+        if (bundle != null){
+            position = bundle.getInt("month");
+        }else {
+            position = 0;
+        }
+        recyclerView=root.findViewById(R.id.recycleview);
+        sum = root.findViewById(R.id.sum);
+            m = position;
+            pay = 0.0;
+            income = 0.0;
+            costs.clear();
+            for (Cost c : LitePal.findAll(Cost.class)) {
+                if (c.getM() == (position)) {
+                    costs.add(c);
+                    if (c.getCost() == 1)
+                        pay += c.getMoney();
+                    else
+                        income += c.getMoney();
                 }
-                sum.setText("支出:￥"+pay+"收入:￥"+income);
-                adapter = new Adapter(costs);
-                recyclerView.setAdapter(adapter);
-                 }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
-            });
             floatingActionButton = root.findViewById(R.id.fbutton);
             floatingActionButton.setOnClickListener(view -> {
                       Intent intent=new Intent(getContext(),AddActivity.class);
                       launcherAdd.launch(intent);
             });
-            sum.setText("支出:￥"+pay+"收入:￥"+income);
-            recyclerView = root.findViewById(R.id.recycleview);
+
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             adapter = new Adapter(costs);
@@ -107,7 +94,7 @@ public class DetailFragment extends Fragment{
                 if(null==data)return;
                 Cost c=new Cost(data.getDoubleExtra("money",0));
                     c.setReason(data.getStringExtra("reason"));
-                    c.setCost(1);
+                    c.setCost(data.getIntExtra("cost",-1));
                     c.setDate(new Date());
                     c.setM(m);
                     c.setImagid(data.getIntExtra("imagine",0));
@@ -121,26 +108,20 @@ public class DetailFragment extends Fragment{
                 int pos=data.getIntExtra("pos",-1);
                 Cost c=costs.get(pos);
                 double mo=c.getMoney();
+                int i=c.getCost();
                 c.setMoney(data.getDoubleExtra("money",0));
                 c.setReason(data.getStringExtra("reason"));
-                c.setCost(1);
+                c.setCost(data.getIntExtra("cost",-1));
                 c.setDate(new Date());
                 c.setM(m);
                 c.setImagid(data.getIntExtra("imagine",0));
                 costs.set(pos,c);
                 c.save();
-                update(c.getCost(),mo,c.getCost(),c.getMoney());
+                update(i,mo,c.getCost(),c.getMoney());
                 adapter.notifyItemChanged(pos);
             }
         }
     });
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding=null;
-
-    }
-
     public  void update(int y,double my,int i,double money){
         switch (y){
             case 1:if(i==1)
@@ -154,7 +135,7 @@ public class DetailFragment extends Fragment{
                 { pay+=money;
                 income-=my; }
                 else
-                pay-=(my-money);
+                income-=(my-money);
                 break;
         }
         sum.setText("支出:￥"+pay+"收入:￥"+income);
@@ -238,5 +219,12 @@ public class DetailFragment extends Fragment{
 
     }
 }
+    public static DetailFragment newInstance(Integer i){
+        DetailFragment movieFragment = new DetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("month",i);
+        movieFragment.setArguments(bundle);
+        return movieFragment;
+    }
 
 }
