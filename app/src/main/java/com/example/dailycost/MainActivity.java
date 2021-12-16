@@ -1,6 +1,7 @@
 package com.example.dailycost;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         LitePal.initialize(this);
         setContentView(R.layout.activity_main);
+        if(Build.VERSION.SDK_INT>=21){
+            getSupportActionBar().setElevation(0);
+        }
         BottomNavigationView navView = findViewById(R.id.nav_views);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

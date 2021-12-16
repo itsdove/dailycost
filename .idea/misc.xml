@@ -9,6 +9,7 @@
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2101851851851852" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2101851851851852" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2101851851851852" />
+        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/drawable/tabback.xml" value="0.24479166666666666" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/drawable/tag.xml" value="0.18425925925925926" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/drawable/tag1.xml" value="0.18425925925925926" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.4" />
@@ -18,12 +19,14 @@
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/activity_login.xml" value="0.1945288753799392" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/activity_main2.xml" value="0.4036458333333333" />
-        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/addlayout.xml" value="0.1" />
+        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/addlayout.xml" value="0.4" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/circle.xml" value="0.215625" />
+        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/detaillayout.xml" value="0.23125" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/dialogview.xml" value="0.4" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_dashboard.xml" value="0.1" />
-        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_home.xml" value="0.4" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
+        <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/fragment_tab.xml" value="0.1" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/icon.xml" value="0.11503623188405797" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/itemlayout.xml" value="0.264" />
         <entry key="..\:/androidstuido/file/dailycost/app/src/main/res/layout/loginlayout.xml" value="0.4" />
