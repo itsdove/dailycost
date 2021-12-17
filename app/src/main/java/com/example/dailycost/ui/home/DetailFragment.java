@@ -46,7 +46,6 @@ public class DetailFragment extends Fragment{
     Double income=0.0;
     FloatingActionButton floatingActionButton;
     int m;
-    int position;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,36 +53,35 @@ public class DetailFragment extends Fragment{
         View root = inflater.inflate(R.layout.fragment_detail, container, false);
         Bundle bundle = getArguments();
         if (bundle != null){
-            position = bundle.getInt("month");
+            m = bundle.getInt("month");
         }else {
-            position = 0;
+            m = 0;
         }
         recyclerView=root.findViewById(R.id.recycleview);
         sum = root.findViewById(R.id.sum);
         sum2 = root.findViewById(R.id.sum2);
-            m = position;
-            for (Cost c : LitePal.findAll(Cost.class)) {
-                if (c.getM() == (position)) {
-                    costs.add(c);
-                    if (c.getCost() == 1)
+        for (Cost c : LitePal.findAll(Cost.class)) {
+            if (c.getM() == (m)) {
+                costs.add(c);
+                if (c.getCost() == 1)
                         pay += c.getMoney();
-                    else
+                else
                         income += c.getMoney();
-                }
             }
-            floatingActionButton = root.findViewById(R.id.fbutton);
-            floatingActionButton.setOnClickListener(view -> {
+        }
+        floatingActionButton = root.findViewById(R.id.fbutton);
+        floatingActionButton.setOnClickListener(view -> {
                       Intent intent=new Intent(getContext(),AddActivity.class);
                       launcherAdd.launch(intent);
-            });
-            sum.setText("￥"+pay);
-            sum2.setText("￥"+income);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-            recyclerView.setLayoutManager(layoutManager);
-            adapter = new Adapter(costs);
-            recyclerView.setAdapter(adapter);
-            recyclerView.addItemDecoration(new SpacesItemDecoration(8));
-            return root;
+        });
+        sum.setText("￥"+pay);
+        sum2.setText("￥"+income);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new Adapter(costs);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SpacesItemDecoration(8));
+        return root;
     }
     ActivityResultLauncher<Intent> launcherAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
@@ -192,6 +190,7 @@ public class DetailFragment extends Fragment{
                 Intent intent=new Intent(getContext(),AddActivity.class);
                 intent.putExtra("why",1);
                 intent.putExtra("pos",position);
+                intent.putExtra("cost",costs.get(position).getCost());
                 intent.putExtra("money",costs.get(position).getMoney());
                 intent.putExtra("reason",costs.get(position).getReason());
                 intent.putExtra("ima",costs.get(position).getImagid());

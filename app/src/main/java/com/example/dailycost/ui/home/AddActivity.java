@@ -18,6 +18,8 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addlayout);
+        RadioButton rd2 = findViewById(R.id.btn2);
+        RadioButton rd1 = findViewById(R.id.btn1);
         EditText money = findViewById(R.id.number);
         EditText reason = findViewById(R.id.reason);
         Button button = findViewById(R.id.b1);
@@ -26,6 +28,8 @@ public class AddActivity extends AppCompatActivity {
         String m1 = String.valueOf(intent1.getDoubleExtra("money", 0.0));
         if (!m1.equals("0.0"))
             money.setText(m1);
+        if(intent1.getIntExtra("cost",1)==0)
+            rd2.setChecked(true);
         reason.setText(r1);
         final int[] i = {0};
         i[0] = intent1.getIntExtra("ima", -1);
@@ -102,12 +106,10 @@ public class AddActivity extends AppCompatActivity {
             reason.setText("意外收入");
             i[0] = R.drawable.cp;
         });
-        RadioButton rd1 = findViewById(R.id.btn1);
         rd1.setOnClickListener(v -> {
             findViewById(R.id.g2).setVisibility(View.GONE);
             findViewById(R.id.g1).setVisibility(View.VISIBLE);
         });
-        RadioButton rd2 = findViewById(R.id.btn2);
         rd2.setOnClickListener(v -> {
             {
                 findViewById(R.id.g1).setVisibility(View.GONE);
