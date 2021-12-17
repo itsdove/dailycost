@@ -51,7 +51,7 @@ public class DetailFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         LitePal.getDatabase();
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        View root = inflater.inflate(R.layout.fragment_detail, container, false);
         Bundle bundle = getArguments();
         if (bundle != null){
             position = bundle.getInt("month");

@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.dailycost.Cost;
 import com.example.dailycost.R;
-import com.example.dailycost.databinding.FragmentNotificationsBinding;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -21,12 +20,10 @@ import java.util.List;
 
 public class OverlookFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        View root = inflater.inflate(R.layout.fragment_overlook, container, false);
         PieChart pieChart=root.findViewById(R.id.piechart);
         List<Cost> l= LitePal.where("cost=?","1").find(Cost.class);
         Double allmoney=0.0;
@@ -148,6 +145,5 @@ public class OverlookFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }
