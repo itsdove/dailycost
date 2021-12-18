@@ -260,7 +260,7 @@
         android:id="@+id/sum"
        android:layout_gravity="center"
         android:textSize="30dp"
-        android:textColor="#2E8B57"
+        android:textColor="#00BB92"
         ></TextView>
 
 </LinearLayout>

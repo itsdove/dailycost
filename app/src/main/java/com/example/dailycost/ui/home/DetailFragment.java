@@ -136,7 +136,8 @@ public class DetailFragment extends Fragment{
                 income-=(my-money);
                 break;
         }
-        sum.setText("支出:￥"+pay+"收入:￥"+income);
+        sum.setText("￥"+pay);
+        sum2.setText("￥"+income);
     }
 
  class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {

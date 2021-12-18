@@ -380,7 +380,7 @@
             android:id="@+id/b1"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="确认"
+            android:text="confirm"
             android:textColor="@color/white"
             android:layout_height="wrap_content"></Button>
     </LinearLayout>
